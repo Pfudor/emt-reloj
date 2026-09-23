@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EMT Madrid - Parada</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+    .contenedor {
+      width: 90%;
+      max-width: 350px;
+      text-align: center;
+    }
+    h2 {
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+    input {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 16px;
+      font-size: 28px;
+      text-align: center;
+      border-radius: 15px;
+      border: none;
+      outline: none;
+    }
+    button {
+      width: 100%;
+      margin-top: 12px;
+      padding: 16px;
+      font-size: 22px;
+      font-weight: bold;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+    }
+    #error {
+      margin-top: 10px;
+      color: #ff7777;
+      min-height: 1.2em;
+    }
+  </style>
+</head>
+<body>
+  <div class="contenedor">
+    <h2>Número de parada</h2>
+    <form id="formulario">
+      <input
+        id="parada"
+        type="number"
+        inputmode="numeric"
+        placeholder="Ej. 1234"
+        autofocus
+      >
+      <button type="submit">Ver tiempos</button>
+    </form>
+    <div id="error"></div>
+  </div>
+
+  <script>
+    const formulario = document.getElementById("formulario");
+    const parada = document.getElementById("parada");
+    const error = document.getElementById("error");
+
+    formulario.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const numero = parada.value.trim();
+
+      if (!/^\d{3,4}$/.test(numero)) {
+        error.textContent = "Introduce una parada de 3 o 4 dígitos.";
+        return;
+      }
+
+      window.location.href =
+        "https://www.emtmadrid.es/PMVVisor/pmv.aspx?stopnum=" +
+        numero +
+        "&size=3";
+    });
+  </script>
+</body>
+</html>
